@@ -1,0 +1,6 @@
+name: UnitedUtils
+version: '1.0-SNAPSHOT-1'
+main: org.unitedlands.unitedUtils.UnitedUtils
+api-version: '1.21'
+authors: [Litning11]
+description: A plugin with miscellaneous utilities for United Lands

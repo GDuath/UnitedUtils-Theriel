@@ -1,0 +1,13 @@
+#################
+##             ##
+## UnitedUtils ##
+##             ##
+#################
+
+##############
+# Explosions #
+##############
+
+# This section covers all the explosion tweaks for PvP.
+
+nerf-crystal-damage: true
