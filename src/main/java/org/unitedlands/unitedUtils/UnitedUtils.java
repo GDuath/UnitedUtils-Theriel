@@ -1,6 +1,7 @@
 package org.unitedlands.unitedUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,7 +19,9 @@ public final class UnitedUtils extends JavaPlugin {
         saveDefaultConfig();
         FileConfiguration config = getConfig();
         // Register the unitedutils command.
-        Objects.requireNonNull(getCommand("unitedutils")).setExecutor(new Commands(this));
+        Commands commandHandler = new Commands(this);
+        Objects.requireNonNull(getCommand("unitedutils")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("unitedutils")).setTabCompleter(commandHandler);
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getLogger().info("UnitedUtils has been enabled!");
         // Plugin startup logic.
