@@ -1,6 +1,0 @@
-name: UnitedUtils
-version: '${project.version}'
-main: org.unitedlands.unitedUtils.UnitedUtils
-api-version: '1.21'
-authors: [Litning11]
-description: A plugin with miscellaneous utilities for United Lands

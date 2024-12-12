@@ -1,6 +1,11 @@
 name: UnitedUtils
-version: '1.0-SNAPSHOT-1'
+version: '${project.version}'
 main: org.unitedlands.unitedUtils.UnitedUtils
 api-version: '1.21'
 authors: [Litning11]
 description: A plugin with miscellaneous utilities for United Lands
+commands:
+  unitedutils:
+    description: Reloads the UnitedUtils plugin.
+    usage: /unitedutils reload
+    permission: united.utils.admin
