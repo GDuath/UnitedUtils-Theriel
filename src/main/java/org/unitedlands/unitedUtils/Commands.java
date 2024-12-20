@@ -25,6 +25,18 @@ public class Commands implements CommandExecutor, TabCompleter {
         this.plugin = plugin;
     }
 
+    // Generic handler for simple message commands.
+    private void handleMessageCommand(CommandSender sender, String messageKey) {
+        if (!sender.hasPermission("united.utils.player")) {
+            sender.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("messages.no-permission")));
+            return;
+        }
+        List<String> messages = plugin.getConfig().getStringList(messageKey);
+        for (String line : messages) {
+            sender.sendMessage(line);
+        }
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         FileConfiguration config = plugin.getConfig();
@@ -42,67 +54,32 @@ public class Commands implements CommandExecutor, TabCompleter {
         }
 
         // Map command.
-        if (label.equalsIgnoreCase("map")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-            List<String> mapMessage = config.getStringList("messages.map");
-                for (String line : mapMessage) {
-                    sender.sendMessage(line);
-                }
+        if (command.getName().equalsIgnoreCase("map")) {
+            handleMessageCommand(sender,"messages.map");
             return true;
         }
 
         // Discord command.
-        if (label.equalsIgnoreCase("discord")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-            List<String> mapMessage = config.getStringList("messages.discord");
-            for (String line : mapMessage) {
-                sender.sendMessage(line);
-            }
+        if (command.getName().equalsIgnoreCase("discord")) {
+            handleMessageCommand(sender,"messages.discord");
             return true;
         }
 
         // Wiki command.
-        if (label.equalsIgnoreCase("wiki")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-            List<String> mapMessage = config.getStringList("messages.wiki");
-            for (String line : mapMessage) {
-                sender.sendMessage(line);
-            }
+        if (command.getName().equalsIgnoreCase("wiki")) {
+            handleMessageCommand(sender,"messages.wiki");
             return true;
         }
 
         // Shop command.
-        if (label.equalsIgnoreCase("shop")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-            List<String> mapMessage = config.getStringList("messages.shop");
-            for (String line : mapMessage) {
-                sender.sendMessage(line);
-            }
+        if (command.getName().equalsIgnoreCase("shop")) {
+            handleMessageCommand(sender,"messages.shop");
             return true;
         }
 
         // Greylist command.
-        if (label.equalsIgnoreCase("greylist")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-            List<String> mapMessage = config.getStringList("messages.greylist");
-            for (String line : mapMessage) {
-                sender.sendMessage(line);
-            }
+        if (command.getName().equalsIgnoreCase("greylist")) {
+            handleMessageCommand(sender,"messages.greylist");
             return true;
         }
 

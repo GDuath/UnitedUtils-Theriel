@@ -1,6 +1,7 @@
 package org.unitedlands.unitedUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,34 +13,33 @@ public final class UnitedUtils extends JavaPlugin {
         HandlerList.unregisterAll(this);
     }
 
+    // Helper method to register all commands with an executor and tab completer.
+    private void registerCommand(String name, Commands executor, TabCompleter completer) {
+        Objects.requireNonNull(getCommand(name), "Command " + name + " is not defined in plugin.yml.")
+                .setExecutor(executor);
+        Objects.requireNonNull(getCommand(name)).setTabCompleter(completer);
+    }
+
     @Override
     public void onEnable() {
+        // Plugin startup logic.
         // Save default config if not already present.
         saveDefaultConfig();
         FileConfiguration config = getConfig();
         // Register the unitedutils command.
         Commands commandHandler = new Commands(this);
-        Objects.requireNonNull(getCommand("unitedutils")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("unitedutils")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand("remskill")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("remskill")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand("whoarewe")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("whoarewe")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "map")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("map")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "discord")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("discord")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "wiki")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("wiki")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "shop")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("shop")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "greylist")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("greylist")).setTabCompleter(commandHandler);
-        Objects.requireNonNull(getCommand( "toptime")).setExecutor(commandHandler);
-        Objects.requireNonNull(getCommand("toptime")).setTabCompleter(commandHandler);
+        registerCommand("unitedutils", commandHandler, commandHandler);
+        registerCommand("remskill", commandHandler, commandHandler);
+        registerCommand("whoarewe", commandHandler, commandHandler);
+        registerCommand("map", commandHandler, commandHandler);
+        registerCommand("discord", commandHandler, commandHandler);
+        registerCommand("wiki", commandHandler, commandHandler);
+        registerCommand("shop", commandHandler, commandHandler);
+        registerCommand("greylist", commandHandler, commandHandler);
+        registerCommand("toptime", commandHandler, commandHandler);
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getLogger().info("UnitedUtils has been enabled!");
-        // Plugin startup logic.
+
 
     }
 
