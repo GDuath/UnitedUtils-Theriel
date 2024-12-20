@@ -65,3 +65,8 @@ messages:
     - '§610. §f%cmi_playtimetop_name_10% - §c%cmi_playtimetop_time_10%'
     - '§f'
     - '§c§m+|✦                                                |✦+'
+  whoarewe:
+    - '§c§m+|✦        §r§c§l[§f§l Who are we? §c§l]§c§m        |✦+'
+    - '§7We are a towny earth server with a'
+    - '§7friendly community and custom plugins!'
+    - '§c§m+|✦                  +✦+                  |✦+'

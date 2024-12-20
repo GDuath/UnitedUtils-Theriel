@@ -23,6 +23,8 @@ public final class UnitedUtils extends JavaPlugin {
         Objects.requireNonNull(getCommand("unitedutils")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand("remskill")).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand("remskill")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand("whoarewe")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("whoarewe")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand( "map")).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand("map")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand( "discord")).setExecutor(commandHandler);

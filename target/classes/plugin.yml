@@ -39,3 +39,7 @@ commands:
     description: Displays the top playtimes.
     usage: /greylist
     permission: united.utils.player
+  whoarewe:
+    description: Tells players who we are.
+    usage: /whoarewe
+    permission: united.utils.admin

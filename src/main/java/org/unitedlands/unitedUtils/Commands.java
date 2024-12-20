@@ -106,6 +106,21 @@ public class Commands implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        // Who are we?
+        if (label.equalsIgnoreCase("whoarewe")) {
+            if (!sender.hasPermission("united.utils.admin")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.whoarewe");
+            for (String line : mapMessage) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.sendMessage(line);
+                }
+            }
+            return true;
+        }
+
         // Top Time command.
         if (label.equalsIgnoreCase("toptime")) {
             if (!sender.hasPermission("united.utils.player")) {
