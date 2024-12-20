@@ -9,3 +9,7 @@ commands:
     description: Reloads the UnitedUtils plugin.
     usage: /unitedutils reload
     permission: united.utils.admin
+  map:
+    description: Displays the map link.
+    usage: /map
+    permission: united.utils.player

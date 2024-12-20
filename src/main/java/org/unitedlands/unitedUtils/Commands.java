@@ -23,21 +23,38 @@ public class Commands implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        // Reload command.
         FileConfiguration config = plugin.getConfig();
-        if (!sender.hasPermission("united.utils.admin")) {
-            sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-            return true;
-        }
-        if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+
+        // Reload command.
+        if (label.equalsIgnoreCase("unitedutils") && args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+            if (!sender.hasPermission("united.utils.admin")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
             plugin.reloadConfig();
             ((UnitedUtils) plugin).reloadPluginConfig();
             sender.sendMessage(Objects.requireNonNull(config.getString("messages.reload")));
-        } else {
-            sender.sendMessage(Objects.requireNonNull(config.getString("messages.invalid-command")));
+            return true;
         }
+
+        // Map command.
+        if (label.equalsIgnoreCase("map")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.map");
+                for (String line : mapMessage) {
+                    sender.sendMessage(line);
+                }
+            return true;
+        }
+
+        // Default invalid command message.
+        sender.sendMessage(Objects.requireNonNull(config.getString("messages.invalid-command")));
         return true;
     }
+
     @Override
     @Nullable
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
