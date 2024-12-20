@@ -23,6 +23,16 @@ public final class UnitedUtils extends JavaPlugin {
         Objects.requireNonNull(getCommand("unitedutils")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand( "map")).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand("map")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand( "discord")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("discord")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand( "wiki")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("wiki")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand( "shop")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("shop")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand( "greylist")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("greylist")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand( "toptime")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("toptime")).setTabCompleter(commandHandler);
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getLogger().info("UnitedUtils has been enabled!");
         // Plugin startup logic.

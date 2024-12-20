@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import me.clip.placeholderapi.PlaceholderAPI;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
     private final JavaPlugin plugin;
+    private Player player;
 
     public Commands(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -47,6 +50,72 @@ public class Commands implements CommandExecutor, TabCompleter {
                 for (String line : mapMessage) {
                     sender.sendMessage(line);
                 }
+            return true;
+        }
+
+        // Discord command.
+        if (label.equalsIgnoreCase("discord")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.discord");
+            for (String line : mapMessage) {
+                sender.sendMessage(line);
+            }
+            return true;
+        }
+
+        // Wiki command.
+        if (label.equalsIgnoreCase("wiki")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.wiki");
+            for (String line : mapMessage) {
+                sender.sendMessage(line);
+            }
+            return true;
+        }
+
+        // Shop command.
+        if (label.equalsIgnoreCase("shop")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.shop");
+            for (String line : mapMessage) {
+                sender.sendMessage(line);
+            }
+            return true;
+        }
+
+        // Greylist command.
+        if (label.equalsIgnoreCase("greylist")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.greylist");
+            for (String line : mapMessage) {
+                sender.sendMessage(line);
+            }
+            return true;
+        }
+
+        // Top Time command.
+        if (label.equalsIgnoreCase("toptime")) {
+            if (!sender.hasPermission("united.utils.player")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            List<String> mapMessage = config.getStringList("messages.toptime");
+            for (String line : mapMessage) {
+                String parsedLine = PlaceholderAPI.setPlaceholders(player, line);
+                sender.sendMessage(parsedLine);
+            }
             return true;
         }
 

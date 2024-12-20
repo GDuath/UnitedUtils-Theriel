@@ -1,11 +1,37 @@
 name: UnitedUtils
-version: '1.1'
+version: '1.2'
 main: org.unitedlands.unitedUtils.UnitedUtils
 api-version: '1.21'
 authors: [Litning11]
 description: A plugin with miscellaneous utilities for United Lands
+softdepend:
+  - PlaceholderAPI
 commands:
   unitedutils:
-    description: Reloads the UnitedUtils plugin.
+    description: Reloads the plugin config.
     usage: /unitedutils reload
     permission: united.utils.admin
+  map:
+    description: Displays the map link.
+    usage: /map
+    permission: united.utils.player
+  discord:
+    description: Displays the Discord link.
+    usage: /discord
+    permission: united.utils.player
+  wiki:
+    description: Displays the wiki link.
+    usage: /wiki
+    permission: united.utils.player
+  shop:
+    description: Displays the shop link.
+    usage: /shop
+    permission: united.utils.player
+  greylist:
+    description: Displays the greylist links.
+    usage: /greylist
+    permission: united.utils.player
+  toptime:
+    description: Displays the top playtimes.
+    usage: /greylist
+    permission: united.utils.player
