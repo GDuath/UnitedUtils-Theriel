@@ -11,6 +11,10 @@ commands:
     description: Reloads the plugin config.
     usage: /unitedutils reload
     permission: united.utils.admin
+  remskill:
+    description: Console script for removing a skill.
+    usage: /remskill [Player Name] [Skill Name]
+    permission: united.utils.admin
   map:
     description: Displays the map link.
     usage: /map

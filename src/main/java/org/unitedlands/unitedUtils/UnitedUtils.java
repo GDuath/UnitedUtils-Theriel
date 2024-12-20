@@ -21,6 +21,8 @@ public final class UnitedUtils extends JavaPlugin {
         Commands commandHandler = new Commands(this);
         Objects.requireNonNull(getCommand("unitedutils")).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand("unitedutils")).setTabCompleter(commandHandler);
+        Objects.requireNonNull(getCommand("remskill")).setExecutor(commandHandler);
+        Objects.requireNonNull(getCommand("remskill")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand( "map")).setExecutor(commandHandler);
         Objects.requireNonNull(getCommand("map")).setTabCompleter(commandHandler);
         Objects.requireNonNull(getCommand( "discord")).setExecutor(commandHandler);

@@ -1,5 +1,7 @@
 package org.unitedlands.unitedUtils;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +20,6 @@ import me.clip.placeholderapi.PlaceholderAPI;
 public class Commands implements CommandExecutor, TabCompleter {
 
     private final JavaPlugin plugin;
-    private Player player;
 
     public Commands(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -111,15 +112,55 @@ public class Commands implements CommandExecutor, TabCompleter {
                 sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
                 return true;
             }
-            List<String> mapMessage = config.getStringList("messages.toptime");
-            for (String line : mapMessage) {
-                String parsedLine = PlaceholderAPI.setPlaceholders(player, line);
-                sender.sendMessage(parsedLine);
+
+            for (int i = 1; i <= 10; i++) {
+                // Create placeholders for name and time.
+                String namePlaceholder = "%cmi_playtimetop_name_" + i + "%";
+                String timePlaceholder = "%cmi_playtimetop_time_" + i + "%";
+
+                String parsedName;
+                String parsedTime;
+
+                if (sender instanceof Player player) {
+                    // Parse placeholders for players.
+                    parsedName = PlaceholderAPI.setPlaceholders(player, namePlaceholder);
+                    parsedTime = PlaceholderAPI.setPlaceholders(player, timePlaceholder);
+                } else {
+                    // Parse placeholders for console.
+                    OfflinePlayer consolePlaceholder = Bukkit.getOfflinePlayer("Console");
+                    parsedName = PlaceholderAPI.setPlaceholders(consolePlaceholder, namePlaceholder);
+                    parsedTime = PlaceholderAPI.setPlaceholders(consolePlaceholder, timePlaceholder);
+                }
+
+                // Send the parsed placeholders to the sender.
+                sender.sendMessage(i + ": " + parsedName + " - " + parsedTime);
             }
             return true;
         }
 
-        // Default invalid command message.
+        // Remove skill command (console script for job skill menu).
+        if (label.equalsIgnoreCase("remskill")) {
+            if (!sender.hasPermission("united.utils.admin")) {
+                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
+                return true;
+            }
+            if (args.length < 2)
+                return true;
+
+            String targetPlayer = args[0];
+            String skill = args[1];
+
+            for (int i = 1; i <= 3; i++) {
+                String consoleCommand = String.format(
+                        "lp user %s permission set united.skills.%s.%d false",
+                        targetPlayer, skill, i
+                );
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), consoleCommand);
+            }
+            return true;
+        }
+
+            // Default invalid command message.
         sender.sendMessage(Objects.requireNonNull(config.getString("messages.invalid-command")));
         return true;
     }
