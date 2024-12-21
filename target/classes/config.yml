@@ -16,6 +16,18 @@ end-crystals:
 # The damage the crystal will do, in %. 0 will do no damage, 50 will do half damage, and 100 will do full damage.
   crystal-damage-percent: 0
 
+####################
+# Void Protections #
+####################
+
+# Settings for void protection.
+void-protections:
+  # List of worlds for the plugin to function in. Leave empty to disable.
+  whitelisted-worlds:
+    - world
+  # What y level to protect under, include one decimal space (Default: -64.0).
+  void-threshold: -64.0
+
 ############
 # Language #
 ############
@@ -26,6 +38,7 @@ messages:
   reload: "§c§lU§f§lL §7§lCore §8§l» §2Plugin reloaded."
   no-permission: "§c§lU§f§lL §7§lCore §8§l» §2You don't have permission to perform this command."
   invalid-command: "§c§lU§f§lL §7§lCore §8§l» §cInvalid command usage."
+  void-protect: "§c§lU§f§lL §7§lCore §8§l» §cBe more careful! Sending back to spawn."
   map:
     - "§7§m────────────§7[ §c§lMAP §7]§7§m────────────"
     - "               §chttps://map.unitedlands.org"
