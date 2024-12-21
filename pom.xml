@@ -6,7 +6,7 @@
 
   <groupId>org.unitedlands</groupId>
   <artifactId>UnitedUtils</artifactId>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT1</version>
   <packaging>jar</packaging>
 
   <name>UnitedUtils</name>
