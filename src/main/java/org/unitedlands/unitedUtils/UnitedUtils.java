@@ -39,6 +39,7 @@ public final class UnitedUtils extends JavaPlugin {
         registerCommand("toptime", commandHandler, commandHandler);
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
+        getServer().getPluginManager().registerEvents(new PortalManager(config), this);
         getLogger().info("UnitedUtils has been enabled!");
 
     }
