@@ -28,6 +28,7 @@ public final class UnitedUtils extends JavaPlugin {
         FileConfiguration config = getConfig();
         // Register the unitedutils command.
         Commands commandHandler = new Commands(this);
+        new org.unitedlands.unitedUtils.WorldBorders(this);
         registerCommand("unitedutils", commandHandler, commandHandler);
         registerCommand("remskill", commandHandler, commandHandler);
         registerCommand("whoarewe", commandHandler, commandHandler);

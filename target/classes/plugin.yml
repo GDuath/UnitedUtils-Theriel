@@ -1,5 +1,5 @@
 name: UnitedUtils
-version: '1.5-SNAPSHOT3'
+version: '1.6-SNAPSHOT1'
 main: org.unitedlands.unitedUtils.UnitedUtils
 api-version: '1.21'
 authors: [Litning11]
