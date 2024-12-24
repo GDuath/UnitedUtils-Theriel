@@ -46,35 +46,6 @@ void-protections:
   # What y level to protect under, include one decimal space (Default: -64.0).
   void-threshold: -64.0
 
-#################
-# World Borders #
-#################
-
-# World border handling.
-
-worlds:
-  # x and z define the centre of the border. radiusX and radiusZ define how far out to stretch the border in each direction.
-  world_earth:
-    x: 0.0
-    z: 0.0
-    radiusX: 36808
-    radiusZ: 18440
-  world_resource:
-    x: 0.0
-    z: 0.0
-    radiusX: 15000
-    radiusZ: 15000
-  world_nether:
-    x: 0.0
-    z: 0.0
-    radiusX: 15000
-    radiusZ: 15000
-  world_the_end:
-    x: 0.0
-    z: 0.0
-    radiusX: 15000
-    radiusZ: 15000
-
 ############
 # Language #
 ############

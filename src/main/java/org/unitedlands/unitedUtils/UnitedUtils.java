@@ -28,7 +28,6 @@ public final class UnitedUtils extends JavaPlugin {
         FileConfiguration config = getConfig();
         // Register the unitedutils command.
         Commands commandHandler = new Commands(this);
-        new org.unitedlands.unitedUtils.WorldBorders(this);
         registerCommand("unitedutils", commandHandler, commandHandler);
         registerCommand("remskill", commandHandler, commandHandler);
         registerCommand("whoarewe", commandHandler, commandHandler);
@@ -41,6 +40,7 @@ public final class UnitedUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
+        new BorderWrapper(this);
         getLogger().info("UnitedUtils has been enabled!");
 
     }
