@@ -1,8 +1,6 @@
 package org.unitedlands.unitedUtils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,97 +16,97 @@ public class BorderWrapper implements Listener {
 
     private final JavaPlugin plugin;
     private final World worldEarth;
-    private final int borderMaxX = 36800;
-    private final int borderMinX = -36800;
+    private final int borderMaxX = 36800; // Eastern boundary.
+    private final int borderMinX = -36800; // Western boundary.
+    private final int borderMaxZ = -18400; // Northern boundary.
+    private final int borderMinZ = 18400;  // Southern boundary.
+    private final int buffer = 160; // Safe zone buffer (10 chunks).
     private final HashMap<UUID, Long> lastTeleportTime = new HashMap<>();
-    private final HashMap<UUID, Boolean> isTeleporting = new HashMap<>();
-    private final long teleportCooldown = 1000; // Cooldown in milliseconds
+    private final HashMap<UUID, Location> lastTeleportLocation = new HashMap<>();
 
     public BorderWrapper(JavaPlugin plugin) {
         this.plugin = plugin;
-        this.worldEarth = Bukkit.getWorld("world_earth");
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        this.worldEarth = plugin.getServer().getWorld("world_earth");
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    // Handle East-West border wrapping.
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         Location to = event.getTo();
-        Location from = event.getFrom();
 
         if (!to.getWorld().equals(worldEarth)) {
             return;
         }
 
         UUID playerId = player.getUniqueId();
-
-        // Skip processing if the player is currently teleporting
-        if (isTeleporting.getOrDefault(playerId, false)) {
-            return;
-        }
-
-        // Only process if the player has moved to a different chunk
-        if ((from.getBlockX() >> 4) == (to.getBlockX() >> 4) && (from.getBlockZ() >> 4) == (to.getBlockZ() >> 4)) {
-            return;
-        }
-
-        int x = to.getBlockX();
         long currentTime = System.currentTimeMillis();
 
-        // Prevent teleport loops with a cooldown.
-        if (lastTeleportTime.containsKey(playerId) && (currentTime - lastTeleportTime.get(playerId)) < teleportCooldown) {
+        // Suppress movement immediately after teleport.
+        if (lastTeleportTime.containsKey(playerId) && currentTime - lastTeleportTime.get(playerId) < 500) {
+            return; // Suppress movement events for 500ms after teleport.
+        }
+
+        // Suppress redundant movement near the last teleport location.
+        Location lastLocation = lastTeleportLocation.get(playerId);
+        if (lastLocation != null && lastLocation.distanceSquared(to) < buffer * buffer) {
             return;
         }
 
-        if (x <= borderMinX || x >= borderMaxX) {
-            // Update the cooldown before teleporting to prevent loops.
-            lastTeleportTime.put(playerId, currentTime);
-            isTeleporting.put(playerId, true);
+        // Check if player crosses a boundary.
+        int x = to.getBlockX();
+        int z = to.getBlockZ();
 
-            // Schedule the teleport for better performance.
+        if (x <= borderMinX || x >= borderMaxX || z >= borderMinZ || z <= borderMaxZ) {
+            // Check if cooldown is up.
+            if (lastTeleportTime.getOrDefault(playerId, 0L) + 5000 > currentTime) {
+                return;
+            }
+
+            // Schedule teleport.
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    try {
-                        Location originalLocation;
-                        if (x <= borderMinX) {
-                            originalLocation = new Location(worldEarth, borderMaxX - 1, to.getY(), to.getZ(), to.getYaw(), to.getPitch());
-                        } else {
-                            originalLocation = new Location(worldEarth, borderMinX + 1, to.getY(), to.getZ(), to.getYaw(), to.getPitch());
-                        }
-
-                        // Find a safe location before teleporting.
-                        Location safeLocation = findSafeLocation(originalLocation);
-                        if (safeLocation != null) {
-                            player.teleport(safeLocation);
-                        }
-                    } finally {
-                        // Allow processing after teleport.
-                        isTeleporting.put(playerId, false);
-                    }
+                    Location teleportLocation = calculateTeleportLocation(x, z, to);
+                    player.teleport(teleportLocation);
+                    lastTeleportLocation.put(playerId, teleportLocation);
+                    lastTeleportTime.put(playerId, System.currentTimeMillis());
                 }
             }.runTask(plugin);
         }
     }
 
-    private Location findSafeLocation(Location location) {
-        World world = location.getWorld();
-        if (world == null) {
-            return null;
+    private Location calculateTeleportLocation(int x, int z, Location currentLocation) {
+        float yaw = currentLocation.getYaw();
+        Location teleportLocation = new Location(worldEarth, currentLocation.getX(), currentLocation.getY(), currentLocation.getZ(), yaw, currentLocation.getPitch());
+
+        // Use a helper method to calculate the wrapped X-coordinate.
+        int wrappedX = getWrappedX(x);
+
+        if (x <= borderMinX) {
+            // Wrap East to West.
+            teleportLocation.setX(borderMaxX - buffer);
+        } else if (x >= borderMaxX) {
+            // Wrap West to East.
+            teleportLocation.setX(borderMinX + buffer);
+        } else if (z >= borderMinZ) {
+            // Wrap South to South.
+            teleportLocation.setX(wrappedX);
+            teleportLocation.setZ(borderMinZ - buffer);
+            teleportLocation.setYaw(180); // Face player North
+        } else if (z <= borderMaxZ) {
+            // Wrap North to North.
+            teleportLocation.setX(wrappedX);
+            teleportLocation.setZ(borderMaxZ + buffer);
+            teleportLocation.setYaw(0); // Face player South
         }
 
-        int x = location.getBlockX();
-        int z = location.getBlockZ();
-        // Get the highest safe Y level.
-        int y = world.getHighestBlockYAt(x, z);
+        return teleportLocation;
+    }
 
-        // Ensure the location is on solid ground.
-        Location safeLocation = new Location(world, x, y, z, location.getYaw(), location.getPitch());
-        Material blockType = safeLocation.getBlock().getType();
-        if (blockType.isSolid() && blockType != Material.LAVA) {
-            return safeLocation;
-        }
-        return null;
+    private int getWrappedX(int x) {
+        // Calculate total width of the world.
+        int worldWidth = borderMaxX - borderMinX;
+        return ((x - borderMinX + worldWidth / 2) % worldWidth) + borderMinX;
     }
 }
