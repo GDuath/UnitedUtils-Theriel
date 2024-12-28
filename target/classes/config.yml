@@ -28,7 +28,7 @@ nether-portals:
     - world_earth
 
 portal-mapping:
-  # Groups of linked overworlds and corresponding dimensions. Multiple groups are supported but they must each have a defined overworld, nether, and end.
+  # Groups of linked overworlds and corresponding dimensions. Multiple groups are supported, but they must each have a defined overworld, nether, and end.
   world_resource:
     nether: world_nether
     end: world_the_end

@@ -40,6 +40,7 @@ public final class UnitedUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
+        new BorderWrapper(this);
         getLogger().info("UnitedUtils has been enabled!");
 
     }
