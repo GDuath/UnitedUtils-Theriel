@@ -40,6 +40,10 @@ public final class UnitedUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
+        getServer().getPluginManager().registerEvents(new WikiMapLink(), this);
+        WikiMapLink wikiMapLink = new WikiMapLink();
+        getServer().getPluginManager().registerEvents(wikiMapLink, this);
+        wikiMapLink.registerStrippedNationStatus();
         new BorderWrapper(this);
         getLogger().info("UnitedUtils has been enabled!");
 
