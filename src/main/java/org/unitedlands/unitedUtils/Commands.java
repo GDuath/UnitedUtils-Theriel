@@ -83,6 +83,11 @@ public class Commands implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        // Sidebar command.
+        if (command.getName().equalsIgnoreCase("sb")) {
+            return true;
+        }
+
         // Who are we?
         if (label.equalsIgnoreCase("whoarewe")) {
             if (!sender.hasPermission("united.utils.admin")) {
@@ -157,7 +162,6 @@ public class Commands implements CommandExecutor, TabCompleter {
         return true;
     }
 
-    @Override
     @Nullable
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (!sender.hasPermission("united.utils.admin")) {

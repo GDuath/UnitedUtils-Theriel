@@ -33,6 +33,19 @@ portal-mapping:
     nether: world_nether
     end: world_the_end
 
+spawn-portal:
+# Settings for the portal at spawn.
+  world: "world"
+  corner1:
+    x: 1106
+    y: 45
+    z: 997
+  corner2:
+    x: 1111
+    y: 38
+    z: 997
+  command: "warps"
+
 ####################
 # Void Protections #
 ####################

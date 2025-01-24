@@ -45,3 +45,7 @@ commands:
     description: Tells players who we are.
     usage: /whoarewe
     permission: united.utils.admin
+  sb:
+    description: Open the sidebar.
+    usage: /sb
+    permission: united.utils.player
