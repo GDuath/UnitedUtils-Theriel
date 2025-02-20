@@ -5,6 +5,8 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.unitedlands.unitedUtils.Listeners.StatusScreenListener;
+
 import java.util.Objects;
 
 public final class UnitedUtils extends JavaPlugin {
@@ -45,8 +47,10 @@ public final class UnitedUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvents(wikiMapLink, this);
         wikiMapLink.registerStrippedNationStatus();
         new BorderWrapper(this);
-        getLogger().info("UnitedUtils has been enabled!");
 
+        this.getServer().getPluginManager().registerEvents(new StatusScreenListener(this), this);
+
+        getLogger().info("UnitedUtils has been enabled!");
     }
 
     public void reloadPluginConfig() {
