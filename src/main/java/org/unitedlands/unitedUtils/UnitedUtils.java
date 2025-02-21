@@ -4,12 +4,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.unitedlands.unitedUtils.Listeners.StatusScreenListener;
+
+import net.milkbowl.vault.economy.Economy;
 
 import java.util.Objects;
 
 public final class UnitedUtils extends JavaPlugin {
+
+    private Economy economy;
 
     public void unregisterListeners() {
         HandlerList.unregisterAll(this);
@@ -39,6 +44,7 @@ public final class UnitedUtils extends JavaPlugin {
         registerCommand("shop", commandHandler, commandHandler);
         registerCommand("greylist", commandHandler, commandHandler);
         registerCommand("toptime", commandHandler, commandHandler);
+        getCommand("rtp").setExecutor(new RandomTeleportCommand(this));
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
@@ -50,6 +56,8 @@ public final class UnitedUtils extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new StatusScreenListener(this), this);
 
+        loadEconomy();
+
         getLogger().info("UnitedUtils has been enabled!");
     }
 
@@ -59,7 +67,26 @@ public final class UnitedUtils extends JavaPlugin {
         FileConfiguration config = getConfig();
         unregisterListeners();
         Bukkit.getPluginManager().registerEvents(new ExplosionManager(config), this);
+        loadEconomy();
         getLogger().info("Plugin configuration reloaded.");
+    }
+
+    private void loadEconomy() {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
+            getLogger().severe("Vault could not be found.");
+            return;
+        }
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            getLogger().severe("Economy service provider could not be found.");
+            return;
+        }
+        economy = rsp.getProvider();
+    }
+
+    public Economy getEconomy()
+    {
+        return economy;
     }
 
     @Override
