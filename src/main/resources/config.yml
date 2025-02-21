@@ -59,6 +59,84 @@ void-protections:
   # What y level to protect under, include one decimal space (Default: -64.0).
   void-threshold: -64.0
 
+####################
+# Random teleport  #
+####################
+
+# Settings for the /rtp command.
+
+ul-rtp:
+  use-economy: true
+  max-attempts: 20
+  cooldown: 5
+
+  # List of worlds with rtp support. Mising worlds have rtp disabled automatically.
+  worlds:
+    world_earth:
+      cost: 0
+      zones:
+        europe:
+          min-x: 720
+          max-x: 4000
+          min-z: -11000
+          max-z: -9200
+        africa:
+          min-x: 1000
+          max-x: 7000
+          min-z: -4600
+          max-z: 1000
+        asia:
+          min-x: 15000
+          max-x: 23000
+          min-z: -8500
+          max-z: -3500
+        north_america:
+          min-x: -24000
+          max-x: -16000
+          min-z: -11000
+          max-z: -6000
+        south_america:
+          min-x: -14000
+          max-x: -9500
+          min-z: 0
+          max-z: 6500
+        oceania:
+          min-x: 24000
+          max-x: 31000
+          min-z: 3500
+          max-z: 6500
+        antarctica:
+          min-x: -30000
+          max-x: 36000
+          min-z: 15000
+          max-z: 18000
+        india:
+          min-x: 14500
+          max-x: 17500
+          min-z: -6000
+          max-z: -3000
+        middle_east:
+          min-x: 8000
+          max-x: 12000
+          min-z: -7800
+          max-z: -3200
+    world_nether:
+      cost: 100
+      zones:
+        default:
+          min-x: -14500
+          max-x: 14500
+          min-z: -14500
+          max-z: 14500
+    world_resource:
+      cost: 100
+      zones:
+        default:
+          min-x: -14500
+          max-x: 14500
+          min-z: -14500
+          max-z: 14500
+
 ############
 # Language #
 ############
@@ -115,3 +193,18 @@ messages:
     - '§7We are a towny earth server with a'
     - '§7friendly community and custom plugins!'
     - '§c§m+|✦                  +✦+                  |✦+'
+
+  rtp:
+    prefix: "§cU§fL RTP §8» "
+    tp-start: "§7Finding safe random position, please be patient..."
+    tp-costs: "§7Paying random teleportation costs..."
+    tp-end: "§7Successsfully teleported to random position."
+    error-rtp-disabled: "§eRandom teleportation is disabled in this world."
+    error-no-world: "§cThe requested world does not exist."
+    error-no-zones: "§cThere are no places to teleport to in this world."
+    error-no-zone: "§cThe requested zone does not exist."
+    error-no-block: "§eCould not find a safe block to teleport to within allowed time, please try again."
+    warning-active-tp: "§eYou are already teleporting. Please wait for the current search to finish."
+    warning-cooldown: "§eYou are on cooldown."
+    warning-cooldown-elapsed: "§eHigh server load, waiting for cooldown to be reset. Give us a moment..."
+    warning-nomoney: "§eYou cannot afford to random teleport."

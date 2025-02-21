@@ -49,3 +49,6 @@ commands:
     description: Open the sidebar.
     usage: /sb
     permission: united.utils.player
+  rtp:
+    description: Random teleport function.
+    usage: /rtp
