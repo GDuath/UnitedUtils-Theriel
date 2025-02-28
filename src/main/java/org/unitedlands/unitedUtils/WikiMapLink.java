@@ -21,7 +21,7 @@ public class WikiMapLink implements Listener {
         getMapPlugin().getLayerManager().registerReplacement("strippednationstatus", town -> {
             if (!town.hasNation())
                 return "";
-            return town.isCapital() ? "Capital of the " : "Member of the ";
+            return town.isCapital() ? "Capital of " : "Member of ";
         });
     }
 }
