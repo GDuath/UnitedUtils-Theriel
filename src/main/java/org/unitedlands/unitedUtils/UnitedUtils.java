@@ -43,7 +43,6 @@ public final class UnitedUtils extends JavaPlugin {
         registerCommand("wiki", commandHandler, commandHandler);
         registerCommand("shop", commandHandler, commandHandler);
         registerCommand("greylist", commandHandler, commandHandler);
-        registerCommand("toptime", commandHandler, commandHandler);
         getCommand("rtp").setExecutor(new RandomTeleportCommand(this));
         getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);

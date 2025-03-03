@@ -13,6 +13,8 @@ This plugin requires a few dependencies to function:
 * [MapTowny](https://github.com/TownyAdvanced/MapTowny)
 * [CMI Vault](https://www.zrips.net/faq/) (Found under 'Extra Resources')
 
+It also has a soft dependency for [TownyFlight](https://github.com/TownyAdvanced/TownyFlight) to fix a bug where TFly will not deactivate properly on world changes. 
+
 # Permissions
 This plugin only has two permission nodes, `united.utils.player` and `united.utils.admin`, the .player node will currently only allow them to use the info commands (outlined below). .admin permission node gives Staff permission to reload the plugin config file. 
 

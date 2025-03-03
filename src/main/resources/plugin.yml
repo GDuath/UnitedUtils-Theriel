@@ -8,6 +8,8 @@ depend:
   - Towny
   - MapTowny
   - Vault
+softdepend:
+  - TownyFlight
 commands:
   unitedutils:
     description: Reloads the plugin config.
