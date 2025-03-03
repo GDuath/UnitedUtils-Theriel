@@ -70,7 +70,7 @@ ul-rtp:
   max-attempts: 20
   cooldown: 5
 
-  # List of worlds with rtp support. Mising worlds have rtp disabled automatically.
+  # List of worlds with rtp support. Missing worlds have rtp disabled automatically.
   worlds:
     world_earth:
       cost: 0
@@ -173,21 +173,6 @@ messages:
     - '§f'
     - '§c§lPlanet Minecraft: &§https://www.planetminecraft.com/forums/minecraft/servers/united-lands-towny-earth-war-643354/'
     - '§7§m───────────────────────────────────'
-  toptime:
-    - '§c§m+|✦                        §r§c§l[§f§lTop Playtime§c§l]§c§m                        |✦+'
-    - '§f'
-    - '§61. §f%cmi_playtimetop_name_1% - §c%cmi_playtimetop_time_1%'
-    - '§62. §f%cmi_playtimetop_name_2% - §c%cmi_playtimetop_time_2%'
-    - '§63. §f%cmi_playtimetop_name_3% - §c%cmi_playtimetop_time_3%'
-    - '§64. §f%cmi_playtimetop_name_4% - §c%cmi_playtimetop_time_4%'
-    - '§65. §f%cmi_playtimetop_name_5% - §c%cmi_playtimetop_time_5%'
-    - '§66. §f%cmi_playtimetop_name_6% - §c%cmi_playtimetop_time_6%'
-    - '§67. §f%cmi_playtimetop_name_7% - §c%cmi_playtimetop_time_7%'
-    - '§68. §f%cmi_playtimetop_name_8% - §c%cmi_playtimetop_time_8%'
-    - '§69. §f%cmi_playtimetop_name_9% - §c%cmi_playtimetop_time_9%'
-    - '§610. §f%cmi_playtimetop_name_10% - §c%cmi_playtimetop_time_10%'
-    - '§f'
-    - '§c§m+|✦                                                |✦+'
   whoarewe:
     - '§c§m+|✦        §r§c§l[§f§l Who are we? §c§l]§c§m        |✦+'
     - '§7We are a towny earth server with a'
@@ -198,7 +183,7 @@ messages:
     prefix: "§cU§fL RTP §8» "
     tp-start: "§7Finding safe random position, please be patient..."
     tp-costs: "§7Paying random teleportation costs..."
-    tp-end: "§7Successsfully teleported to random position."
+    tp-end: "§7Successfully teleported to random position."
     error-rtp-disabled: "§eRandom teleportation is disabled in this world."
     error-no-world: "§cThe requested world does not exist."
     error-no-zones: "§cThere are no places to teleport to in this world."

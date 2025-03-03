@@ -4,10 +4,10 @@ main: org.unitedlands.unitedUtils.UnitedUtils
 api-version: '1.21'
 authors: [Litning11]
 description: A plugin with miscellaneous utilities for United Lands
-softdepend:
+depend:
   - Towny
   - MapTowny
-  - PlaceholderAPI
+  - Vault
 commands:
   unitedutils:
     description: Reloads the plugin config.
@@ -35,10 +35,6 @@ commands:
     permission: united.utils.player
   greylist:
     description: Displays the greylist links.
-    usage: /greylist
-    permission: united.utils.player
-  toptime:
-    description: Displays the top playtimes.
     usage: /greylist
     permission: united.utils.player
   whoarewe:
