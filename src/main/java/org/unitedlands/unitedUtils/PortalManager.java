@@ -154,8 +154,8 @@ public class PortalManager implements Listener {
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPermission("group.admin")) {
-            player.performCommand("townyflight:tfly");
+        if (!player.hasPermission("group.admin") || !player.hasPermission("group.mod")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "townyflight:tfly " + player.getName());
         }
     }
 }

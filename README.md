@@ -27,10 +27,6 @@ This module handles map wrapping, this means teleporting players from one edge o
 
 It currently replicates East-West, North-North, and South-South travel that accurately mimics that of a globe. The borders are currently hard-coded but should work for any 1:500 scale map of Earth. 
 
-## Explosion Manager
-
-This module handles explosion PvP nerfs such as crystal, anchor, and beds. Each one can be enabled and disabled, so you can only nerf the relevant ones to you, and the damage reduction is configurable to your liking. So, it is possible to completely disable certain damage sources, or just reduce it by a set amount.
-
 ## Portal Manager
 
 The portal manager module was made to disable Nether portals on the Earth map and instead linking them to temporary 'resource' worlds that reset periodically. This was to create a vanilla experience when interacting with the resource worlds as the overworld, Nether, and End all link as expected in the base game, while also leaving the spawn and Earth worlds untouched.

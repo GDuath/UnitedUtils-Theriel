@@ -44,7 +44,6 @@ public final class UnitedUtils extends JavaPlugin {
         registerCommand("shop", commandHandler, commandHandler);
         registerCommand("greylist", commandHandler, commandHandler);
         getCommand("rtp").setExecutor(new RandomTeleportCommand(this));
-        getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
         getServer().getPluginManager().registerEvents(new WikiMapLink(), this);
@@ -65,7 +64,6 @@ public final class UnitedUtils extends JavaPlugin {
         reloadConfig();
         FileConfiguration config = getConfig();
         unregisterListeners();
-        Bukkit.getPluginManager().registerEvents(new ExplosionManager(config), this);
         loadEconomy();
         getLogger().info("Plugin configuration reloaded.");
     }
