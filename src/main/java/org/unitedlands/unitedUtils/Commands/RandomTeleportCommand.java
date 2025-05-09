@@ -1,4 +1,4 @@
-package org.unitedlands.unitedUtils;
+package org.unitedlands.unitedUtils.Commands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +20,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.unitedlands.unitedUtils.UnitedUtils;
 
 public class RandomTeleportCommand implements CommandExecutor {
 
