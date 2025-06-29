@@ -1,6 +1,7 @@
 package org.unitedlands.unitedUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +19,8 @@ import org.unitedlands.unitedUtils.Modules.WikiMapLink;
 
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 public final class UnitedUtils extends JavaPlugin {
 
     private Economy economy;
@@ -27,10 +30,11 @@ public final class UnitedUtils extends JavaPlugin {
     }
 
     // Helper method to register all commands with an executor and tab completer.
-    private void registerCommand(String name, Commands executor, TabCompleter completer) {
+    private void registerCommand(String name, @Nonnull CommandExecutor executor, TabCompleter completer) {
         Objects.requireNonNull(getCommand(name), "Command " + name + " is not defined in plugin.yml.")
                 .setExecutor(executor);
-        Objects.requireNonNull(getCommand(name)).setTabCompleter(completer);
+        if (completer != null)
+            Objects.requireNonNull(getCommand(name)).setTabCompleter(completer);
     }
 
     @Override
@@ -40,16 +44,23 @@ public final class UnitedUtils extends JavaPlugin {
         saveDefaultConfig();
         FileConfiguration config = getConfig();
         // Register the unitedutils command.
-        Commands commandHandler = new Commands(this);
-        registerCommand("unitedutils", commandHandler, commandHandler);
-        registerCommand("remskill", commandHandler, commandHandler);
-        registerCommand("whoarewe", commandHandler, commandHandler);
-        registerCommand("map", commandHandler, commandHandler);
-        registerCommand("discord", commandHandler, commandHandler);
-        registerCommand("wiki", commandHandler, commandHandler);
-        registerCommand("shop", commandHandler, commandHandler);
-        registerCommand("greylist", commandHandler, commandHandler);
-        getCommand("rtp").setExecutor(new RandomTeleportCommand(this));
+        Commands generalCommands = new Commands(this);
+        registerCommand("unitedutils", generalCommands, generalCommands);
+        registerCommand("remskill", generalCommands, generalCommands);
+        registerCommand("whoarewe", generalCommands, generalCommands);
+        registerCommand("map", generalCommands, generalCommands);
+        registerCommand("discord", generalCommands, generalCommands);
+        registerCommand("wiki", generalCommands, generalCommands);
+        registerCommand("shop", generalCommands, generalCommands);
+        registerCommand("greylist", generalCommands, generalCommands);
+        registerCommand("toptime", generalCommands, generalCommands);
+
+        registerCommand("rtp", new RandomTeleportCommand(this), null);
+
+        var tabListCommand = new TablistCommand(this);
+        registerCommand("tags", tabListCommand, tabListCommand);
+
+        getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
         getServer().getPluginManager().registerEvents(new WikiMapLink(), this);
