@@ -1,4 +1,4 @@
-package org.unitedlands.unitedUtils;
+package org.unitedlands.unitedUtils.Modules;
 
 import me.silverwolfg11.maptowny.MapTownyPlugin;
 import me.silverwolfg11.maptowny.events.MapReloadEvent;

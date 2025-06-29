@@ -13,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.unitedlands.unitedUtils.UnitedUtils;
 
 public class StatusScreenListener implements Listener {
+
+    @SuppressWarnings("unused")
     private final UnitedUtils plugin;
     private final @NotNull MiniMessage miniMessage = MiniMessage.miniMessage();
 
