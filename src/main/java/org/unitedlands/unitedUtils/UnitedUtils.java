@@ -68,7 +68,6 @@ public final class UnitedUtils extends JavaPlugin {
     public void reloadPluginConfig() {
         // Reapply config on reload.
         reloadConfig();
-        FileConfiguration config = getConfig();
         unregisterListeners();
         loadEconomy();
         getLogger().info("Plugin configuration reloaded.");
