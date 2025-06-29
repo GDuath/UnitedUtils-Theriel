@@ -6,7 +6,7 @@
 
   <groupId>org.unitedlands</groupId>
   <artifactId>UnitedUtils</artifactId>
-  <version>1.9.1</version>
+  <version>1.9.2</version>
   <packaging>jar</packaging>
 
   <name>UnitedUtils</name>
@@ -73,7 +73,7 @@
     <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
-      <version>1.21.3-R0.1-SNAPSHOT</version>
+      <version>1.21.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -99,6 +99,12 @@
       <artifactId>Vault</artifactId>
       <version>1.7.3-CMI</version>
       <scope>provided</scope>
+    </dependency>
+     <dependency>
+        <groupId>net.luckperms</groupId>
+        <artifactId>api</artifactId>
+        <version>5.4</version>
+        <scope>provided</scope>
     </dependency>
   </dependencies>
 
