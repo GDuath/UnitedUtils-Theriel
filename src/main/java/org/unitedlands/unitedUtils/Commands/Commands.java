@@ -1,7 +1,6 @@
-package org.unitedlands.unitedUtils;
+package org.unitedlands.unitedUtils.Commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,11 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.unitedlands.unitedUtils.UnitedUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import me.clip.placeholderapi.PlaceholderAPI;
 
 public class Commands implements CommandExecutor, TabCompleter {
 
@@ -99,38 +99,6 @@ public class Commands implements CommandExecutor, TabCompleter {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.sendMessage(line);
                 }
-            }
-            return true;
-        }
-
-        // Top Time command.
-        if (label.equalsIgnoreCase("toptime")) {
-            if (!sender.hasPermission("united.utils.player")) {
-                sender.sendMessage(Objects.requireNonNull(config.getString("messages.no-permission")));
-                return true;
-            }
-
-            for (int i = 1; i <= 10; i++) {
-                // Create placeholders for name and time.
-                String namePlaceholder = "%cmi_playtimetop_name_" + i + "%";
-                String timePlaceholder = "%cmi_playtimetop_time_" + i + "%";
-
-                String parsedName;
-                String parsedTime;
-
-                if (sender instanceof Player player) {
-                    // Parse placeholders for players.
-                    parsedName = PlaceholderAPI.setPlaceholders(player, namePlaceholder);
-                    parsedTime = PlaceholderAPI.setPlaceholders(player, timePlaceholder);
-                } else {
-                    // Parse placeholders for console.
-                    OfflinePlayer consolePlaceholder = Bukkit.getOfflinePlayer("Console");
-                    parsedName = PlaceholderAPI.setPlaceholders(consolePlaceholder, namePlaceholder);
-                    parsedTime = PlaceholderAPI.setPlaceholders(consolePlaceholder, timePlaceholder);
-                }
-
-                // Send the parsed placeholders to the sender.
-                sender.sendMessage(i + ": " + parsedName + " - " + parsedTime);
             }
             return true;
         }

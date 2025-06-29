@@ -10,6 +10,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.unitedlands.unitedUtils.Listeners.StatusScreenListener;
 
 import net.milkbowl.vault.economy.Economy;
+import org.unitedlands.unitedUtils.Commands.Commands;
+import org.unitedlands.unitedUtils.Commands.RandomTeleportCommand;
+import org.unitedlands.unitedUtils.Modules.BorderWrapper;
+import org.unitedlands.unitedUtils.Modules.PortalManager;
+import org.unitedlands.unitedUtils.Modules.VoidProtection;
+import org.unitedlands.unitedUtils.Modules.WikiMapLink;
 
 import java.util.Objects;
 
@@ -75,7 +81,6 @@ public final class UnitedUtils extends JavaPlugin {
         reloadConfig();
         FileConfiguration config = getConfig();
         unregisterListeners();
-        Bukkit.getPluginManager().registerEvents(new ExplosionManager(config), this);
         loadEconomy();
         getLogger().info("Plugin configuration reloaded.");
     }

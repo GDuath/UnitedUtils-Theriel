@@ -1,4 +1,4 @@
-package org.unitedlands.unitedUtils;
+package org.unitedlands.unitedUtils.Modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.world.PortalCreateEvent;
@@ -148,5 +149,14 @@ public class PortalManager implements Listener {
         }
     }
 
+    // This is a fix for TownyFlight sometimes persisting incorrectly over world change.
+    // Code adapted from TheNylox.
+    @EventHandler
+    public void onWorldChange(PlayerChangedWorldEvent event) {
+        Player player = event.getPlayer();
+        if (!player.hasPermission("group.admin") || !player.hasPermission("group.mod")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "townyflight:tfly " + player.getName());
+        }
+    }
 }
 

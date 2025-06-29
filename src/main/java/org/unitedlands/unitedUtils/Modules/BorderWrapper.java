@@ -1,4 +1,4 @@
-package org.unitedlands.unitedUtils;
+package org.unitedlands.unitedUtils.Modules;
 
 import org.bukkit.Location;
 import org.bukkit.World;
