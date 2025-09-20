@@ -50,7 +50,4 @@ commands:
   rtp:
     description: Random teleport function.
     usage: /rtp
-  tags:
-    description: Toggles optional towny tags in the tab list
-    usage: /tablist
   
