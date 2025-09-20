@@ -12,6 +12,7 @@ import org.unitedlands.unitedUtils.Listeners.StatusScreenListener;
 import net.milkbowl.vault.economy.Economy;
 import org.unitedlands.unitedUtils.Commands.Commands;
 import org.unitedlands.unitedUtils.Commands.RandomTeleportCommand;
+import org.unitedlands.unitedUtils.Commands.TownyNationCommandExtensions;
 import org.unitedlands.unitedUtils.Modules.BorderWrapper;
 import org.unitedlands.unitedUtils.Modules.PortalManager;
 import org.unitedlands.unitedUtils.Modules.VoidProtection;
@@ -43,6 +44,7 @@ public final class UnitedUtils extends JavaPlugin {
         // Save default config if not already present.
         saveDefaultConfig();
         FileConfiguration config = getConfig();
+
         // Register the unitedutils command.
         Commands generalCommands = new Commands(this);
         registerCommand("unitedutils", generalCommands, generalCommands);
@@ -53,14 +55,11 @@ public final class UnitedUtils extends JavaPlugin {
         registerCommand("wiki", generalCommands, generalCommands);
         registerCommand("shop", generalCommands, generalCommands);
         registerCommand("greylist", generalCommands, generalCommands);
-        registerCommand("toptime", generalCommands, generalCommands);
-
         registerCommand("rtp", new RandomTeleportCommand(this), null);
 
-        var tabListCommand = new TablistCommand(this);
-        registerCommand("tags", tabListCommand, tabListCommand);
+        // Register Towny command extensions
+        new TownyNationCommandExtensions(this);
 
-        getServer().getPluginManager().registerEvents(new ExplosionManager(config), this);
         getServer().getPluginManager().registerEvents(new VoidProtection(config), this);
         getServer().getPluginManager().registerEvents(new PortalManager(config), this);
         getServer().getPluginManager().registerEvents(new WikiMapLink(), this);
