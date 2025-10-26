@@ -7,6 +7,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.unitedlands.unitedUtils.Listeners.SpawnerListener;
 import org.unitedlands.unitedUtils.Listeners.StatusScreenListener;
 
 import net.milkbowl.vault.economy.Economy;
@@ -14,6 +15,7 @@ import org.unitedlands.unitedUtils.Commands.Commands;
 import org.unitedlands.unitedUtils.Commands.RandomTeleportCommand;
 import org.unitedlands.unitedUtils.Commands.TownyNationCommandExtensions;
 import org.unitedlands.unitedUtils.Modules.BorderWrapper;
+import org.unitedlands.unitedUtils.Modules.ChunkVisitCache;
 import org.unitedlands.unitedUtils.Modules.PortalManager;
 import org.unitedlands.unitedUtils.Modules.VoidProtection;
 import org.unitedlands.unitedUtils.Modules.WikiMapLink;
@@ -25,6 +27,8 @@ import javax.annotation.Nonnull;
 public final class UnitedUtils extends JavaPlugin {
 
     private Economy economy;
+    private SpawnerListener spawnerListener;
+    private ChunkVisitCache cache;
 
     public void unregisterListeners() {
         HandlerList.unregisterAll(this);
@@ -70,6 +74,10 @@ public final class UnitedUtils extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new StatusScreenListener(this), this);
 
+        cache = new ChunkVisitCache(-2400, 2400, -1200, 1200);
+        spawnerListener = new SpawnerListener(this, cache);
+        this.getServer().getPluginManager().registerEvents(spawnerListener, this);
+
         loadEconomy();
 
         getLogger().info("UnitedUtils has been enabled!");
@@ -78,8 +86,9 @@ public final class UnitedUtils extends JavaPlugin {
     public void reloadPluginConfig() {
         // Reapply config on reload.
         reloadConfig();
-        unregisterListeners();
-        loadEconomy();
+        spawnerListener.loadConfig();
+        // unregisterListeners();
+        // loadEconomy();
         getLogger().info("Plugin configuration reloaded.");
     }
 
