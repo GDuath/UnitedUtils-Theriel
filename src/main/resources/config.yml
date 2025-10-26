@@ -4,6 +4,25 @@
 ##             ##
 #################
 
+####################
+# Spawner Cleaning #
+####################
+
+# Any spawner in the specified worlds that is NOT one of the whitelisted types will be removed on chunk load automatically.
+
+spawner-worlds:
+  - world_earth
+spawner-whitelist:
+  - CHICKEN
+  - COW
+  - SHEEP
+  - PIG
+  - RABBIT
+  - ZOMBIE
+  - SKELETON
+  - SPIDER
+  - GUARDIAN
+
 ###########
 # Portals #
 ###########
