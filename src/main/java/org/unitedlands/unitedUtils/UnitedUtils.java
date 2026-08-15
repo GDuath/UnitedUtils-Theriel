@@ -18,8 +18,6 @@ import org.unitedlands.unitedUtils.Modules.*;
 
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
-
 public final class UnitedUtils extends JavaPlugin {
 
     private Economy economy;
@@ -31,7 +29,7 @@ public final class UnitedUtils extends JavaPlugin {
     }
 
     // Helper method to register all commands with an executor and tab completer.
-    private void registerCommand(String name, @Nonnull CommandExecutor executor, TabCompleter completer) {
+    private void registerCommand(String name, CommandExecutor executor, TabCompleter completer) {
         Objects.requireNonNull(getCommand(name), "Command " + name + " is not defined in plugin.yml.")
                 .setExecutor(executor);
         if (completer != null)
