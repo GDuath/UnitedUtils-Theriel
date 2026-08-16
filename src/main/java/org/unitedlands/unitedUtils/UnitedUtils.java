@@ -23,6 +23,7 @@ public final class UnitedUtils extends JavaPlugin {
     private Economy economy;
     private SpawnerListener spawnerListener;
     private PortalManager portalManager;
+    private HeadDrops headDrops;
 
     public void unregisterListeners() {
         HandlerList.unregisterAll(this);
@@ -67,6 +68,10 @@ public final class UnitedUtils extends JavaPlugin {
         getServer().getPluginManager().registerEvents(wikiMapLink, this);
         wikiMapLink.registerStrippedNationStatus();
 
+        // Register Head Drops module.
+        headDrops = new HeadDrops(this);
+        getServer().getPluginManager().registerEvents(headDrops, this);
+
         // Everything else.
         new BorderWrapper(this);
 
@@ -86,6 +91,7 @@ public final class UnitedUtils extends JavaPlugin {
         reloadConfig();
         spawnerListener.loadConfig();
         portalManager.loadConfig(getConfig());
+        headDrops.loadConfig(getConfig());
         // unregisterListeners();
         // loadEconomy();
         getLogger().info("Plugin configuration reloaded.");

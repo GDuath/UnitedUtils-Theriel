@@ -10,6 +10,7 @@ depend:
   - Vault
 softdepend:
   - TownyFlight
+  - HeadDatabase
 commands:
   unitedutils:
     description: Reloads the plugin config.

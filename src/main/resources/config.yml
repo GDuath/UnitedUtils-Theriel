@@ -146,6 +146,215 @@ ul-rtp:
           min-z: -14500
           max-z: 14500
 
+####################
+#    Head Drops    #
+####################
+
+# Requires the HeadDatabase plugin by Arcaniax: https://www.spigotmc.org/resources/head-database.14280/
+
+# Controls head drop upgrades when mobs or players are killed.
+head-drops:
+  enabled: true
+
+  # Adds a flat percentage to the drop chance per level of looting on the killer's weapon.
+  # EXAMPLE: 1.0 = +1% per Looting level. Set to 0.0 to disable.
+  looting-bonus: 1.0
+
+  # Disable head drops from spawner mobs?
+  prevent-spawner-drops: true
+
+  # Permissions required by the killer to trigger head drops.
+  permissions:
+    hostile: "united.utils.heads.hostile"
+    passive: "united.utils.heads.passive"
+    player: "united.utils.heads.player"
+
+  # Player head drop settings.
+  player:
+    chance: 5.0
+
+  # Hostile mob definitions.
+  hostile:
+    chance: 5.0
+    mobs:
+      BLAZE:
+        hdb-id: "322"
+      BOGGED:
+        hdb-id: "87691"
+      BREEZE:
+        hdb-id: "67244"
+      CAVE_SPIDER:
+        hdb-id: "315"
+      CREAKING:
+        hdb-id: "107231"
+      CREEPER:
+        hdb-id: "2734"
+      DROWNED:
+        hdb-id: "15967"
+      ELDER_GUARDIAN:
+        hdb-id: "25357"
+      ENDERMAN:
+        hdb-id: "318"
+      ENDERMITE:
+        hdb-id: "18427"
+      EVOKER:
+        hdb-id: "3862"
+      GHAST:
+        hdb-id: "83854"
+      GUARDIAN:
+        hdb-id: "666"
+      HOGLIN:
+        hdb-id: "34783"
+      HUSK:
+        hdb-id: "3245"
+      MAGMA_CUBE:
+        hdb-id: "323"
+      PARCHED:
+        hdb-id: "123518"
+      PHANTOM:
+        hdb-id: "17931"
+      PIGLIN:
+        hdb-id: "34885"
+      PIGLIN_BRUTE:
+        hdb-id: "38372"
+      PILLAGER:
+        hdb-id: "25149"
+      RAVAGER:
+        hdb-id: "28196"
+      SHULKER:
+        hdb-id: "32661"
+      SILVERFISH:
+        hdb-id: "106998"
+      SKELETON:
+        hdb-id: "22402"
+      SLIME:
+        hdb-id: "17992"
+      SPIDER:
+        hdb-id: "317"
+      STRAY:
+        hdb-id: "22401"
+      VEX:
+        hdb-id: "3080"
+      VINDICATOR:
+        hdb-id: "3079"
+      WARDEN:
+        hdb-id: "47668"
+      WITCH:
+        hdb-id: "3864"
+      WITHER_SKELETON:
+        hdb-id: "5972"
+      ZOGLIN:
+        hdb-id: "35932"
+      ZOMBIE:
+        hdb-id: "4187"
+      ZOMBIFIED_PIGLIN:
+        hdb-id: "35073"
+      ZOMBIE_VILLAGER:
+        hdb-id: "31556"
+
+  # Passive mob definitions.
+  passive:
+    chance: 5.0
+    mobs:
+      ALLAY:
+        hdb-id: "48054"
+      ARMADILLO:
+        hdb-id: "74256"
+      AXOLOTL:
+        hdb-id: "53850"
+      BAT:
+        hdb-id: "6607"
+      BEE:
+        hdb-id: "31264"
+      CAMEL:
+        hdb-id: "62839"
+      CAMEL_HUSK:
+        hdb-id: "123519"
+      CAT:
+        hdb-id: "357"
+      CHICKEN:
+        hdb-id: "336"
+      COD:
+        hdb-id: "45953"
+      COPPER_GOLEM:
+        hdb-id: "66724"
+      COW:
+        hdb-id: "335"
+      DOLPHIN:
+        hdb-id: "16799"
+      DONKEY:
+        hdb-id: "18144"
+      FOX:
+        hdb-id: "59172"
+      FROG:
+        hdb-id: "51343"
+      GOAT:
+        hdb-id: "42452"
+      GLOW_SQUID:
+        hdb-id: "40327"
+      HAPPY_GHAST:
+        hdb-id: "117196"
+      HORSE:
+        hdb-id: "2911"
+      IRON_GOLEM:
+        hdb-id: "341"
+      LLAMA:
+        hdb-id: "49646"
+      MOOSHROOM:
+        hdb-id: "339"
+      MULE:
+        hdb-id: "3918"
+      NAUTILUS:
+        hdb-id: "123259"
+      OCELOT:
+        hdb-id: "340"
+      PANDA:
+        hdb-id: "31377"
+      PARROT:
+        hdb-id: "35989"
+      PIG:
+        hdb-id: "337"
+      POLAR_BEAR:
+        hdb-id: "18379"
+      PUFFERFISH:
+        hdb-id: "3489"
+      RABBIT:
+        hdb-id: "49677"
+      SALMON:
+        hdb-id: "71327"
+      SHEEP:
+        hdb-id: "57345"
+      SKELETON_HORSE:
+        hdb-id: "6013"
+      SNIFFER:
+        hdb-id: "60620"
+      SNOW_GOLEM:
+        hdb-id: "109991"
+      SQUID:
+        hdb-id: "12237"
+      STRIDER:
+        hdb-id: "35485"
+      SULFUR_CUBE:
+        hdb-id: "128902"
+      TADPOLE:
+        hdb-id: "51348"
+      TRADER_LLAMA:
+        hdb-id: "49645"
+      TROPICAL_FISH:
+        hdb-id: "30233"
+      TURTLE:
+        hdb-id: "17929"
+      VILLAGER:
+        hdb-id: "32845"
+      WANDERING_TRADER:
+        hdb-id: "65745"
+      WOLF:
+        hdb-id: "101517"
+      ZOMBIE_HORSE:
+        hdb-id: "2913"
+      ZOMBIE_NAUTILUS:
+        hdb-id: "123260"
+
 ############
 # Language #
 ############
